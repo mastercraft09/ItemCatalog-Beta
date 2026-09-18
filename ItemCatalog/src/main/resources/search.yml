@@ -1,0 +1,39 @@
+# ================================================================
+#  ItemCatalog — search settings
+# ================================================================
+
+# Master switch for search: /catalog search, the search button, and chat
+# input. false disables all of it.
+enabled: true
+
+# true (default): "Excalibur" matches "excalibur"/"EXCALIBUR".
+case-insensitive: true
+
+# Minimum characters required before a search runs.
+min-length: 2
+
+# true: click search button then type in chat. false: only
+# "/catalog search <name>" works.
+allow-chat-input: true
+
+# Seconds to wait for chat input after clicking the search button.
+chat-timeout-seconds: 30
+
+# Slot layout for search results only (independent of config.yml's
+# gui.item-slots, used when browsing a category).
+item-slots: "10-16,19-25,28-34,37-43"
+item-slots-vertical-fill: true
+
+# ----------------------------------------------------------------
+#  Search aliases
+# ----------------------------------------------------------------
+#  Extra trigger words that pull up an entire category, even if no item is
+#  actually named that way. Key = category id (categories.yml id, or an
+#  MMOItems Type id like ARMOR). Value = list of alias words.
+search-alias:
+  armor:
+    - armatura
+    - armature
+  sword:
+    - spada
+    - spade

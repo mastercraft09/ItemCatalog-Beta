@@ -1,0 +1,46 @@
+# ================================================================
+#  ItemCatalog — MMOItems settings
+# ================================================================
+
+# Master switch for the MMOItems integration.
+enabled: true
+
+# MMOItems Types to fully ignore (not case sensitive). Their items are
+# skipped entirely — never shown, never searchable.
+excluded-categories: []
+
+# Specific items to hide, format "TYPE.ITEM_ID":
+#   - "SWORD.EXCALIBUR"
+excluded-items: []
+
+# Hides items whose icon material is in this list (e.g. placeholder items
+# using a glass pane). Applies to all Types unless overridden per-category
+# below.
+excluded-materials:
+  - BLACK_STAINED_GLASS_PANE
+
+# true (default): a category auto-created from an MMOItems Type uses the
+# same icon MMOItems itself uses for it. false: uses the first item found instead.
+match-native-icons: true
+
+# Master switch for custom per-category slot layouts (see "categories:"
+# below). false (default): every category uses config.yml's gui.item-slots.
+# A category can still opt itself in with "custom-slots: true" even while
+# this is false.
+custom-item-slots-enabled: false
+
+# ----------------------------------------------------------------
+#  Per-category overrides
+# ----------------------------------------------------------------
+#  Key = exact MMOItems Type id (not case sensitive). Every setting below
+#  is optional — set only what you need for that Type.
+categories:
+
+  # Example — remove or edit freely:
+  # ARMOR:
+  #   visible: true            # false = hide this category everywhere (menu + search)
+  #   custom-slots: true       # opt into the "slots"/"vertical-fill" below
+  #   slots: "10-16,19-25,28-34,37-43"
+  #   vertical-fill: true
+  #   excluded-materials: []   # if present, replaces the general list above
+  #                            # for just this category ([] = show everything)

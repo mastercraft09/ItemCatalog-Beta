@@ -1,0 +1,179 @@
+# ================================================================
+#  ItemCatalog — main configuration
+#  Author: MasterCraft
+# ================================================================
+
+# Verbose debug logging in console.
+debug: false
+
+# Who the catalog shows items for:
+#   all      -> every enabled provider (default)
+#   mmoitems -> only MMOItems
+#   other    -> everything EXCEPT MMOItems
+catalog-scope: "all"
+
+# GUI title. Supports & color codes.
+gui:
+  main-title: "&8&lItem Catalog"
+  category-title: "&8&l%category%"
+  search-title: "&8&lSearch results: &f%query%"
+  rows: 6                       # GUI size (3-6)
+  items-per-page: 45            # capped by how many slots gui.item-slots gives
+  fill-empty-slots: true
+  fill-material: "GRAY_STAINED_GLASS_PANE"
+
+  # Slots (0-based) where categories are auto-placed. "slot:" in
+  # categories.yml pins a category outside this pattern.
+  category-slots: "10-16,19-25,28-34"
+
+  # false (default): fill row-by-row. true: fill column-by-column.
+  category-slots-vertical-fill: false
+
+  # Same idea, for item icons when browsing/searching. "slot:" in items.yml
+  # pins an item outside this pattern.
+  item-slots: "10-16,19-25,28-34,37-43"
+
+  # true (default): fill column-by-column (matches MMOItems' own item
+  # browser). false: fill row-by-row.
+  item-slots-vertical-fill: true
+
+  # NOTE: search's own slot layout moved to search.yml.
+
+  # true (default): show the item exactly as its plugin built it (name +
+  # full lore). false: use the generic item-lore block below instead.
+  item-preview-mode: true
+
+  # provider (default): keep the source plugin's own order (recommended for
+  # MMOItems). alphabetical: sort by display name.
+  item-order: "provider"
+
+  # Nav buttons — each fully customizable (enabled/slot/icon/name/lore).
+  # "enabled: false" removes a button entirely. "lore: []" = no lore.
+  # Arrows only appear when there's actually a prev/next page.
+  nav:
+    previous-page-enabled: true
+    previous-page-slot: 18
+    previous-page-icon: "ARROW"
+    previous-page-name: "&e« Previous page"
+    previous-page-lore: []
+
+    next-page-enabled: true
+    next-page-slot: 26
+    next-page-icon: "ARROW"
+    next-page-name: "&eNext page »"
+    next-page-lore: []
+
+    back-enabled: true
+    back-slot: 49
+    back-icon: "BARRIER"
+    back-name: "&c« Back"
+    back-lore: []
+
+    search-enabled: true
+    search-slot: 47
+    search-icon: "COMPASS"
+    search-name: "&bSearch"
+    search-lore:
+      - "&7Click, then type a name"
+      - "&7in chat to search."
+
+    filter-enabled: true
+    filter-slot: 51
+    filter-icon: "HOPPER"
+    filter-name: "&dFilter: &f%filter%"
+    filter-lore:
+      - "&7Click to cycle provider filter"
+
+  # "All <category>" shortcut at the top of a subcategory menu. %category%
+  # = category display name. "enabled: false" removes it.
+  all-category-button:
+    enabled: true
+    material: "CHEST"
+    name: "&f&lAll %category%"
+    lore:
+      - "&7Browse every item in this category"
+      - "&7regardless of subcategory."
+
+  # Generic lore shown only when item-preview-mode is false. Placeholders:
+  # %provider% %category% %subcategory% %rarity% %obtainable_line%
+  item-lore:
+    enabled: true
+    lines:
+      - "&7Provider: &f%provider%"
+      - "&7Category: &f%category%"
+      - "&7Rarity: &f%rarity%"
+      - ""
+      - "%obtainable_line%"
+  obtainable-line: "&aObtainable"
+  not-obtainable-line: "&cNot obtainable"
+
+# Provider/category/rarity filters in the GUI. Disabling this just hides
+# the filter button; search still works either way.
+filters:
+  enabled: true
+  by-provider: true
+  by-category: true
+  by-subcategory: true
+  by-rarity: true
+
+# NOTE: search settings moved to search.yml.
+
+# true: items with obtainable=false are hidden from regular players
+# (itemcatalog.admin always sees everything).
+hide-not-obtainable-from-players: false
+
+# NOTE: category permissions are per-category now — add
+# "require-permission: true" to a category/subcategory in categories.yml.
+
+# NOTE: per-provider settings live in mmoitems.yml (MMOItems) and
+# providers.yml (Oraxen / ItemsAdder / ExecutableItems).
+
+# Fallback classification when an item has no manual override (items.yml)
+# and no usable native category. Matches, in order: exact Material name,
+# then keyword substring in name/lore. First match wins.
+# "enabled: false" skips straight to "miscellaneous" instead.
+auto-classify:
+  enabled: true
+  rules:
+    - category: weapons
+      sub-category: swords
+      materials: ["*_SWORD"]
+    - category: weapons
+      sub-category: axes
+      materials: ["*_AXE"]
+    - category: weapons
+      sub-category: bows
+      materials: ["BOW", "CROSSBOW"]
+    - category: weapons
+      sub-category: staffs
+      materials: ["*_HOE"]
+      keywords: ["staff", "wand"]
+    - category: weapons
+      sub-category: null
+      materials: ["TRIDENT"]
+    - category: armor
+      sub-category: helmets
+      materials: ["*_HELMET", "TURTLE_HELMET"]
+    - category: armor
+      sub-category: chestplates
+      materials: ["*_CHESTPLATE"]
+    - category: armor
+      sub-category: leggings
+      materials: ["*_LEGGINGS"]
+    - category: armor
+      sub-category: boots
+      materials: ["*_BOOTS"]
+    - category: accessories
+      sub-category: null
+      keywords: ["ring", "amulet", "necklace", "charm", "talisman", "belt", "cloak"]
+    - category: consumables
+      sub-category: null
+      materials: ["POTION", "SPLASH_POTION", "LINGERING_POTION", "*_APPLE", "GOLDEN_APPLE",
+                  "BREAD", "COOKED_*", "SUSPICIOUS_STEW", "MILK_BUCKET"]
+    - category: tools
+      sub-category: null
+      materials: ["*_PICKAXE", "*_SHOVEL", "FISHING_ROD", "SHEARS", "FLINT_AND_STEEL"]
+    - category: materials
+      sub-category: null
+      materials: ["*_INGOT", "*_NUGGET", "*_GEM", "DIAMOND", "EMERALD", "*_DUST",
+                  "*_SHARD", "*_CRYSTAL"]

@@ -1,0 +1,61 @@
+name: ItemCatalog
+main: com.mastercraft.itemcatalog.ItemCatalogPlugin
+version: '${project.version}'
+api-version: '1.16'
+author: MasterCraft
+description: Universal, centralized item catalog for MMOItems, Oraxen, ItemsAdder and ExecutableItems.
+
+# None of these are hard dependencies: the plugin enables/disables its
+# providers dynamically at runtime depending on what is actually installed.
+softdepend:
+  - MMOItems
+  - Oraxen
+  - ItemsAdder
+  - ExecutableItems
+
+commands:
+  catalog:
+    description: Open the ItemCatalog GUI, or search/filter items.
+    aliases: [items, catalogo]
+    usage: |
+      /catalog
+      /catalog search <name>
+  itemcatalog:
+    description: Administrative commands for ItemCatalog.
+    usage: /itemcatalog reload
+
+permissions:
+  itemcatalog.*:
+    description: Grants every ItemCatalog permission.
+    default: op
+    children:
+      itemcatalog.use: true
+      itemcatalog.search: true
+      itemcatalog.admin: true
+      itemcatalog.reload: true
+      itemcatalog.category.*: true
+
+  itemcatalog.use:
+    description: Allows opening the /catalog GUI.
+    default: true
+
+  itemcatalog.search:
+    description: Allows using /catalog search.
+    default: true
+
+  itemcatalog.admin:
+    description: Allows administrative access (bypasses obtainable=false hiding, etc).
+    default: op
+
+  itemcatalog.reload:
+    description: Allows /itemcatalog reload.
+    default: op
+
+  # Per-category permissions are registered dynamically at startup as
+  # itemcatalog.category.<id> for every category defined in categories.yml,
+  # plus itemcatalog.category.* as a wildcard. Default is true unless the
+  # admin flips require-permission-per-category in config.yml, in which
+  # case they default to false and must be granted explicitly.
+  itemcatalog.category.*:
+    description: Grants access to every category.
+    default: true

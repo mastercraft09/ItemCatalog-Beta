@@ -1,0 +1,24 @@
+# ================================================================
+#  ItemCatalog — Oraxen / ItemsAdder / ExecutableItems settings
+#
+#  MMOItems is the complex one and has its own dedicated file,
+#  mmoitems.yml. Everything else lives here.
+# ================================================================
+
+providers:
+  oraxen:
+    enabled: true
+    # Oraxen categories to fully exclude from the catalog.
+    excluded-categories: []
+    # Specific Oraxen item ids to fully exclude.
+    excluded-items: []
+
+  itemsadder:
+    enabled: true
+    excluded-categories: []
+    excluded-items: []
+
+  executableitems:
+    enabled: true
+    excluded-categories: []
+    excluded-items: []

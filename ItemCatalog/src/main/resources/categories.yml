@@ -1,0 +1,137 @@
+# ================================================================
+#  ItemCatalog — category tree
+#
+#  Every key under "categories" is an internal category id, used in
+#  items.yml overrides, auto-classify.yml rules, and permission nodes
+#  (itemcatalog.category.<id>).
+#
+#  "enabled: false" hides a category/subcategory (and everything inside
+#  it) entirely, without deleting the config.
+#
+#  "slot: <n>" pins a category to an exact GUI slot (0-based) instead of
+#  auto-placing it. Leave out (or -1) for auto-placement.
+#
+#  "require-permission: true" requires itemcatalog.category.<id> to see
+#  that one category/subcategory. Left out = open to everyone.
+#
+#  NOTE ON MMOITEMS: you don't need to list MMOItems categories here. Every
+#  MMOItems Type (SWORD, AXE, BOW...) auto-becomes its own catalog category
+#  unless mapped below under native-category-mappings.
+# ================================================================
+
+# Master switch for every category below. false = none of them show
+# (dynamic provider categories, e.g. MMOItems Types, are unaffected).
+categories-file-enabled: true
+
+# Where these categories appear relative to dynamic ones:
+#   first -> this file's categories first, dynamic ones after
+#   last  -> dynamic ones first, this file's after (default)
+categories-file-position: "last"
+
+categories:
+
+  weapons:
+    display-name: "&c&lWeapons"
+    icon: "DIAMOND_SWORD"
+    order: 1
+    enabled: true
+    subcategories:
+      swords:
+        display-name: "&cSwords"
+        icon: "DIAMOND_SWORD"
+        order: 1
+        enabled: true
+      axes:
+        display-name: "&6Axes"
+        icon: "DIAMOND_AXE"
+        order: 2
+        enabled: true
+      bows:
+        display-name: "&dBows"
+        icon: "BOW"
+        order: 3
+        enabled: true
+      staffs:
+        display-name: "&5Staffs"
+        icon: "BLAZE_ROD"
+        order: 4
+        enabled: true
+
+  armor:
+    display-name: "&b&lArmor"
+    icon: "DIAMOND_CHESTPLATE"
+    order: 2
+    enabled: true
+    subcategories:
+      helmets:
+        display-name: "&bHelmets"
+        icon: "DIAMOND_HELMET"
+        order: 1
+        enabled: true
+      chestplates:
+        display-name: "&bChestplates"
+        icon: "DIAMOND_CHESTPLATE"
+        order: 2
+        enabled: true
+      leggings:
+        display-name: "&bLeggings"
+        icon: "DIAMOND_LEGGINGS"
+        order: 3
+        enabled: true
+      boots:
+        display-name: "&bBoots"
+        icon: "DIAMOND_BOOTS"
+        order: 4
+        enabled: true
+
+  accessories:
+    display-name: "&d&lAccessories"
+    icon: "GOLD_NUGGET"
+    order: 3
+    enabled: true
+
+  materials:
+    display-name: "&e&lMaterials"
+    icon: "DIAMOND"
+    order: 4
+    enabled: true
+
+  consumables:
+    display-name: "&a&lConsumables"
+    icon: "POTION"
+    order: 5
+    enabled: true
+
+  tools:
+    display-name: "&6&lTools"
+    icon: "DIAMOND_PICKAXE"
+    order: 6
+    enabled: true
+
+  miscellaneous:
+    display-name: "&7&lMiscellaneous"
+    icon: "CHEST"
+    order: 99
+    enabled: true
+
+# ----------------------------------------------------------------
+#  Native-category mapping (CategoryResolver priority 2)
+#
+#  Maps a provider's own raw category (MMOItems Type, Oraxen/ItemsAdder
+#  category) onto one of your categories/subcategories above. Anything not
+#  listed falls through to auto-classify, then miscellaneous.
+#
+#  Left empty by default: every MMOItems Type shows up as its own category
+#  automatically, with zero setup needed. Only add an entry here to merge a
+#  Type into one of the manual categories above instead. Example:
+#
+#  native-category-mappings:
+#    mmoitems:
+#      SWORD: { category: weapons, sub-category: swords }
+#      AXE: { category: weapons, sub-category: axes }
+#      BOW: { category: weapons, sub-category: bows }
+native-category-mappings:
+  mmoitems: { }
+  oraxen: { }
+  itemsadder: { }
+  executableitems: { }

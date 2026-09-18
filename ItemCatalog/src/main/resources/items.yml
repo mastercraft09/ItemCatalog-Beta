@@ -1,0 +1,46 @@
+# ================================================================
+#  ItemCatalog — manual per-item overrides
+#
+#  Absolute highest priority in the CategoryResolver: whatever is set
+#  here always wins over native provider categories and auto-classify.
+#
+#  Key format: <provider>:<item-id>
+#    provider     -> mmoitems | oraxen | itemsadder | executableitems
+#    item-id      -> the id as returned by that provider's own API
+#                     (for MMOItems this is "<TYPE>.<ID>", e.g. SWORD.EXCALIBUR)
+#
+#  Fields (all optional except category/sub-category which need at least
+#  one to actually override placement — set only "slot" to just pin an
+#  item's GUI position without touching its category):
+#    category      -> internal category id from categories.yml
+#    sub-category  -> internal subcategory id
+#    obtainable    -> true/false, overrides whatever the provider reported
+#    slot          -> pin this item to an exact slot (0-based) on the FIRST
+#                      page of whichever category/search view it appears in
+#
+#  Examples (commented out):
+# ================================================================
+
+items: { }
+
+#  Example:
+#
+#  items:
+#    itemsadder:magic_staff:
+#      category: weapons
+#      sub-category: staffs
+#
+#    itemsadder:ruby:
+#      category: materials
+#
+#    oraxen:health_potion:
+#      category: consumables
+#
+#    executableitems:dragon_key:
+#      category: miscellaneous
+#      obtainable: false
+#
+#    mmoitems:SWORD.EXCALIBUR:
+#      category: weapons
+#      sub-category: swords
+#      slot: 0
